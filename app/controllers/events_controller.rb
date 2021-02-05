@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.all
+    @events = Events::Fetch.call(params)
     render json: @events, :include => { :user => { :only => [:email] }}
   end
 
@@ -10,7 +10,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.create(event_params)
+    @event = Event.new(event_params)
 
     if @event.save
       render json: @event
