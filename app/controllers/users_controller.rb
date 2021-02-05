@@ -10,22 +10,14 @@ class UsersController < ApplicationController
     render json: @user
   end
 
-  def new
-    @user = User.new
-  end
-
   def create
     @user = User.new(user_params)
 
     if @user.save
       render json: @user
     else
-      render json: { message: "Formato de envio para cadastro de usuário inválido" }
+      render json: { errors: @user.errors }
     end 
-  end
-
-  def put
-    @user = User.find(params[:id])
   end
 
   def update
@@ -33,6 +25,8 @@ class UsersController < ApplicationController
 
     if @user.update(user_params)
       render json: @user
+    else
+      render json: { errors: @user.errors }
     end
   end
   

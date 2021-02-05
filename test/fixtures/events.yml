@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  event_representative: MyString
+  start_time: 2021-02-05
+  end_time: 2021-02-05
+  theme: MyText
+  link: MyText
+  is_available: false
+  is_favorite: false
+  description: MyText
+  is_expired: false
+  user: one
+
+two:
+  name: MyString
+  event_representative: MyString
+  start_time: 2021-02-05
+  end_time: 2021-02-05
+  theme: MyText
+  link: MyText
+  is_available: false
+  is_favorite: false
+  description: MyText
+  is_expired: false
+  user: two

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_05_140432) do
+ActiveRecord::Schema.define(version: 2021_02_05_154106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,22 @@ ActiveRecord::Schema.define(version: 2021_02_05_140432) do
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string "event_representative"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.text "theme"
+    t.text "link"
+    t.boolean "is_available", default: false
+    t.boolean "is_favorite", default: false
+    t.text "description"
+    t.boolean "is_expired", default: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -37,4 +53,5 @@ ActiveRecord::Schema.define(version: 2021_02_05_140432) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "events", "users"
 end
