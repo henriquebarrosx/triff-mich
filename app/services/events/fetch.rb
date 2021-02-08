@@ -1,23 +1,17 @@
+# frozen_string_literal: true
+
 module Events
   class Fetch
     def self.call(event_params)
-      events = Event.all.order(created_at: :desc)
+      events = Event.includes(:user).all.order(created_at: :desc)
 
-      if event_params[:theme]
-        events = events.where("theme ILIKE ?", "%#{event_params[:theme]}%")
-      end
+      events = events.where('theme ILIKE ?', "%#{event_params[:theme]}%") if event_params[:theme]
 
-      if event_params[:is_favorite]
-        events = events.where({ :is_favorite => event_params[:is_favorite] })
-      end
+      events = events.where({ is_favorite: event_params[:is_favorite] }) if event_params[:is_favorite]
 
-      if event_params[:order_by]
-        events = events.order(start_time: event_params[:order_by])
-      end
+      events = events.order(start_time: event_params[:order_by]) if event_params[:order_by]
 
-      if event_params[:user_id]
-        events = events.where(:user_id => event_params[:user_id])
-      end
+      events = events.where(user_id: event_params[:user_id]) if event_params[:user_id]
 
       events
     end

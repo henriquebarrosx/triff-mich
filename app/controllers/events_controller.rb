@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class EventsController < ApplicationController
   def index
     @events = Events::Fetch.call(params)
-    render json: @events, :include => { :user => { :only => [:email] }}
+    render json: @events, include: { user: { only: %i[id email] } }
   end
 
   def show
     @event = Event.find(params[:id])
-    render json: @event, :include => { :user => { :only => [:email] }}
+    render json: @event, include: { user: { only: %i[id email] } }
   end
 
   def create
@@ -27,10 +29,10 @@ class EventsController < ApplicationController
     else
       render json: { errors: @event.errors }
     end
-
   end
 
   private
+
   def event_params
     params.require(:event).permit(:user_id, :theme, :event_representative, :start_time, :end_time,
                                   :link, :description, :is_available, :is_favorite, :is_expired)
