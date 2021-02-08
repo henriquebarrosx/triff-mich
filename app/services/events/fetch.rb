@@ -1,7 +1,7 @@
 module Events
   class Fetch
     def self.call(event_params)
-      events = Event.all
+      events = Event.all.order(created_at: :desc)
 
       if event_params[:theme]
         events = events.where("theme ILIKE ?", "%#{event_params[:theme]}%")
@@ -19,7 +19,7 @@ module Events
         events = events.where(:user_id => event_params[:user_id])
       end
 
-      events = events.order(created_at: :desc)
+      events
     end
   end
 end
