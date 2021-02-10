@@ -1,5 +1,6 @@
-class UsersController < ApplicationController
+# frozen_string_literal: true
 
+class UsersController < ApplicationController
   def index
     @users = User.all
     render json: @users
@@ -12,6 +13,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.password = params[:password]
 
     if @user.save
       render json: @user
@@ -29,9 +31,10 @@ class UsersController < ApplicationController
       render json: { errors: @user.errors }
     end
   end
-  
+
   private
+
   def user_params
-    params.require(:user).permit(:name, :email)
-  end  
+    params.require(:user).permit(:name, :email, :password)
+  end
 end
