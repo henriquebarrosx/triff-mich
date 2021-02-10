@@ -11,9 +11,9 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  # @body: user: { name:string, email:string, password:string }
   def create
     @user = User.new(user_params)
-    @user.password = params[:password]
 
     if @user.save
       render json: @user
