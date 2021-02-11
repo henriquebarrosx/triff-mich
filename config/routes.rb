@@ -6,5 +6,7 @@ Rails.application.routes.draw do
     resources :events, only: [:index]
   end
 
+  post '/reset_password', to: 'users#recovery_email'
+
   resources :events
 end

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <style>
+        /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+  <div class="container">
+    <div style="padding-bottom: 28px">
+      <div style="margin: 20px 50px">
+        <h1> Redefinição de senha </h1>
+      </div>
+
+      <h1 style="margin: 20px 50px 20px; font-size: 24px"> Olá, <%= @user.email %> </h1>
+
+      <p style="margin: 10px 50px 16px">
+        Lamentamos que esteja tendo problemas ao tentar iniciar a sessão.
+      </p>
+
+      <p style="margin: 0 50px 16px">
+        Redefina sua senha para que você possa continuar desfrutando da plataforma.
+      </p>
+
+      <p style="margin: 2px 50px 16px">
+        Vale lembrar que esse link expira em 1h depois de enviado.
+      </p>
+
+      <p style="margin: 10px 50px 20px">
+        Caso você não tenha desejado redefinir sua senha, apenas ignore este email.
+      </p>
+    </div>
+
+    <a
+      href="https://findme-reset-password.vercel.app/?access_token=${expiredToken}"
+      style="
+        color: #f5f5f5;
+        margin: 0 50px;
+        font-weight: 600;
+        padding: 16px 40px;
+        border-radius: 3px;
+        text-decoration: none;
+        background-color: #09B83E;
+      "
+    >
+      Redefinir senha
+    </a>
+  </div>
+  </body>
+</html>

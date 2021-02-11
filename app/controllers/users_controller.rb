@@ -22,6 +22,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def recovery_email
+    @mailer = Users::SentEmail.call(user_params)
+    render json: @mailer
+  end
+
   def update
     @user = User.find(params[:id])
 
